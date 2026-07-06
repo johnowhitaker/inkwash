@@ -6,6 +6,11 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="theme-color" content="#f1efe8">
+<meta name="application-name" content="inkwash">
+<meta name="apple-mobile-web-app-title" content="inkwash">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./icon-192.png">
+<link rel="apple-touch-icon" href="./icon-192.png">
 <title>inkwash</title>
 <style>
   html, body { margin: 0; height: 100%; overflow: hidden; background: #f1efe8; }
@@ -172,6 +177,12 @@
 <script>
 'use strict';
 (function(){
+
+if ('serviceWorker' in navigator && location.protocol !== 'file:'){
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js').catch(() => {});
+  });
+}
 
 const canvas = document.getElementById('c');
 const cursorEl = document.getElementById('cursor');
